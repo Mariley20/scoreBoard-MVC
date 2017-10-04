@@ -5,7 +5,7 @@ class Model {
             this.index = 0;
             this.players = players;
             this.callback = null;
-            this.inputValue = null;
+            this.input = null;
       }
 
       subscribe(render) {
@@ -28,15 +28,13 @@ class Model {
       agregarJugador (nombre) {
             console.log(nombre);
             this.players.push({
-                  name: nombre,
+                  name: nombre.value,
                   score: 0,
                   id: Utils.uuid()
                });
                this.notify();
       }
       modificarScore(e, score, index, x) {
-            console.log(index+' score '+ score);
-            console.log(this.players[index].score);
             this.players[index].score = score + x;
             this.notify() ;
       }
@@ -74,10 +72,10 @@ const Application = ({ title, model }) => {
       });
       let playerForm = (<form className="add-player-form" onSubmit={e => {
             e.preventDefault();
-            model.agregarJugador(model.inputValue);
+            model.agregarJugador(model.input);
          }}><div className="row">
             <div className="col col-xl-8 col-sm-8">
-                  <input type="text" onChange={e => (model.inputValue = e.target.value)} className="form-control" placeholder="enter a name" /></div>
+                  <input type="text" onChange={e => (model.input = e.target)} className="form-control" placeholder="enter a name" /></div>
             <div className="col col-xl-4 col-sm-4"><button type="submit">Add Player</button></div>
       </div></form>);
       return (<div className="scoreboard">
