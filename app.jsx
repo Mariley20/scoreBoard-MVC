@@ -5,6 +5,7 @@ class Timer extends React.Component {
             this.state = {
                   button : false,
                   date: new Date(), 
+                  numero: 0
             }
       }
       render() {
@@ -33,22 +34,18 @@ class Timer extends React.Component {
             this.setState({
                   button: true,
                 });
-            console.log('start'+ this.button)
-            // this.state.button = false ;
             this.timer = setInterval(() => {
                   this.setState({
-                        date: new Date()
+                        date: new Date(),
+                        numero: this.state.numero + 1
                   });
             }, 1000);
       }
       //componentWillUnmount
       stopTimer() {
-            // this.button = true;
             this.setState({
                   button: false,
                 });
-            console.log('stop'+ this.button)
-            // this.state.button = (this.state.button) ? false : true;
             clearInterval(this.timer);
       }
 }
