@@ -4,7 +4,6 @@ class Timer extends React.Component {
             super(props);
             this.state = {
                   button: false,
-                  date: new Date(),
                   numero: 0
             }
       }
@@ -13,9 +12,9 @@ class Timer extends React.Component {
                   <p>StopWath</p>
                   <p>{this.state.numero}</p>
                   {this.state.button ?
-                        <button onClick={e => this.stopTimer(e)}>Stop</button>
+                        <button onClick={e => this.pararTiempo(e)}>Stop</button>
                         :
-                        <button onClick={e => this.startTimer(e)}>Start</button>
+                        <button onClick={e => this.iniciarTiempo(e)}>Start</button>
                   }
                   <button onClick={e => this.resetearTiempo(e)}>reset</button>
             </div>
@@ -23,19 +22,18 @@ class Timer extends React.Component {
       }
 
       // componentDidMount
-      startTimer() {
+      iniciarTiempo() {
             this.setState({
                   button: true,
             });
             this.timer = setInterval(() => {
                   this.setState({
-                        date: new Date(),
                         numero: this.state.numero + 1
                   });
             }, 1000);
       }
       //componentWillUnmount
-      stopTimer() {
+      pararTiempo() {
             this.setState({
                   button: false,
             });
@@ -45,7 +43,7 @@ class Timer extends React.Component {
             this.setState({
                   numero: 0,
             });
-            this.stopTimer();
+            this.pararTiempo();
       }
 }
 
@@ -75,13 +73,14 @@ class Model {
             return this.players.length;
       }
       agregarJugador(nombre) {
-            console.log(nombre);
+            if(nombre.value != ""){
             this.players.push({
                   name: nombre.value,
                   score: 0,
                   id: Utils.uuid()
             });
-            this.notify();
+            this.input.value = "";
+            this.notify();}
       }
       modificarScore(e, score, index, x) {
             this.players[index].score = score + x;
