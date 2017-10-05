@@ -1,39 +1,32 @@
 class Timer extends React.Component {
       constructor(props) {
-            
+
             super(props);
             this.state = {
-                  button : false,
-                  date: new Date(), 
+                  button: false,
+                  date: new Date(),
                   numero: 0
             }
       }
       render() {
-            // const { title } = this.props;
-            // const start = (e) => {
-            //       this.startTimer();
-            // }
-            // const stop = (e) => {
-            //       this.stopTimer();
-            // }
             return (<div className="col col-xl-4 col-sm-4">
-            <p>StopWath</p>
-            <p>{this.state.date.toLocaleTimeString()}</p>
-            {this.state.button ?
-                  <button onClick={e => this.stopTimer(e)}>Stop</button>
-                  :
-                  <button onClick={e => this.startTimer(e)}>Start</button>
-            }
-            <button>reset</button>
-      </div>
+                  <p>StopWath</p>
+                  <p>{this.state.numero}</p>
+                  {this.state.button ?
+                        <button onClick={e => this.stopTimer(e)}>Stop</button>
+                        :
+                        <button onClick={e => this.startTimer(e)}>Start</button>
+                  }
+                  <button onClick={e => this.resetearTiempo(e)}>reset</button>
+            </div>
             );
       }
-      
+
       // componentDidMount
       startTimer() {
             this.setState({
                   button: true,
-                });
+            });
             this.timer = setInterval(() => {
                   this.setState({
                         date: new Date(),
@@ -45,8 +38,14 @@ class Timer extends React.Component {
       stopTimer() {
             this.setState({
                   button: false,
-                });
+            });
             clearInterval(this.timer);
+      }
+      resetearTiempo() {
+            this.setState({
+                  numero: 0,
+            });
+            this.stopTimer();
       }
 }
 
