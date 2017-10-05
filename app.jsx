@@ -1,11 +1,63 @@
-const porcentaje = 20;
+class Timer extends React.Component {
+      constructor(props) {
+            
+            super(props);
+            this.state = {
+                  button : false,
+                  date: new Date(), 
+            }
+      }
+      render() {
+            // const { title } = this.props;
+            // const start = (e) => {
+            //       this.startTimer();
+            // }
+            // const stop = (e) => {
+            //       this.stopTimer();
+            // }
+            return (<div className="col col-xl-4 col-sm-4">
+            <p>StopWath</p>
+            <p>{this.state.date.toLocaleTimeString()}</p>
+            {this.state.button ?
+                  <button onClick={e => this.stopTimer(e)}>Stop</button>
+                  :
+                  <button onClick={e => this.startTimer(e)}>Start</button>
+            }
+            <button>reset</button>
+      </div>
+            );
+      }
+      
+      // componentDidMount
+      startTimer() {
+            this.setState({
+                  button: true,
+                });
+            console.log('start'+ this.button)
+            // this.state.button = false ;
+            this.timer = setInterval(() => {
+                  this.setState({
+                        date: new Date()
+                  });
+            }, 1000);
+      }
+      //componentWillUnmount
+      stopTimer() {
+            // this.button = true;
+            this.setState({
+                  button: false,
+                });
+            console.log('stop'+ this.button)
+            // this.state.button = (this.state.button) ? false : true;
+            clearInterval(this.timer);
+      }
+}
 
 class Model {
       constructor(players) {
             this.index = 0;
             this.players = players;
             this.input = null;
-            this.button = false;
             this.callback = null;
       }
 
@@ -39,11 +91,6 @@ class Model {
             this.players[index].score = score + x;
             this.notify();
       }
-      iniciaPara(e) {
-            console.log(Date.now());
-           this.button = (this.button)? false : true;
-           this.notify();
-      }
 }
 
 const Application = ({ title, model }) => {
@@ -61,16 +108,7 @@ const Application = ({ title, model }) => {
                         </div>
                   </div>
             </div>
-            <div className="col col-xl-4 col-sm-4">
-                  <p>StopWath</p>
-                  <p>0</p>
-                  {model.button ?
-                        <button onClick={e => model.iniciaPara(e)}>Stop</button>
-                        :
-                        <button onClick={e => model.iniciaPara(e)}>Start</button>
-                  }
-                  <button>reset</button>
-            </div>
+            < Timer />
       </div>);
       let playerList = model.players.map((elemento, index) => {
             return (<div className="row text-center" key={index}>
