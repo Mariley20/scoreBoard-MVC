@@ -8,10 +8,11 @@ class Timer extends React.Component {
             }
       }
       render() {
-            return (<div className="col col-xl-4 col-sm-4">
-                  <p>StopWath</p>
-                  <p>{this.state.numero}</p>
-                  {this.state.button ?
+            return (
+                  <div className="stopwatch">
+                <h2>Stopwatch</h2>
+                <div className="stopwatch-time">{this.state.numero}</div>
+                {this.state.button ?
                         <button onClick={e => this.pararTiempo(e)}>Stop</button>
                         :
                         <button onClick={e => this.iniciarTiempo(e)}>Start</button>
@@ -20,7 +21,7 @@ class Timer extends React.Component {
             </div>
             );
       }
-
+            
       // componentDidMount
       iniciarTiempo() {
             this.setState({
@@ -90,41 +91,45 @@ class Model {
 
 const Application = ({ title, model }) => {
       console.log(model.players)
-      let header = (<div className="row">
-            <div className="col col-xl-8">
-                  <div className="row">
-                        <div className="col col-xl-3 col-sm-3">
-                              <p>Players: </p>
-                              <p>Total Points: </p>
-                        </div>
-                        <div className="col col-xl-3 col-sm-3">
-                              <p> {model.totalPuntos()} </p>
-                              <p> {model.totalJugadores()} </p>
-                        </div>
-                  </div>
+      let header = (
+            <div className="header">
+            <div className="stats">
+                    <div className="col">
+                        <label>Players:</label>
+                        <label>{model.totalJugadores()}</label>
+                    </div>
+                    <div className="col">
+                        <label>Total Points:</label>
+                        <label>{model.totalPuntos()}</label>
+                    </div>
             </div>
-            < Timer />
-      </div>);
+            <h1>Scoreboard</h1>
+            <Timer />
+        </div> );
       let playerList = model.players.map((elemento, index) => {
-            return (<div className="row text-center" key={index}>
-                  <div className="col col-xl-8 col-sm-8">{elemento.name}</div>
-                  <div className="col col-xl-1 col-sm-1 "><button onClick={e => { model.modificarScore(e, elemento.score, index, -1) }}> - </button></div>
-                  <div className="col col-xl-2 col-sm-2">{elemento.score}</div>
-                  <div className="col col-xl-1 col-sm-1"><button onClick={e => { model.modificarScore(e, elemento.score, index, 1) }}> + </button></div>
+            return (
+            <div className="player" key={index}>
+                <div className="player-name">{elemento.name}</div>
+                <div className="player-score">
+                    <div className="counter">
+                        <button className="counter-action decrement" onClick={e => { model.modificarScore(e, elemento.score, index, -1) }}>-</button>
+                        <div className="counter-score">{elemento.score}</div>
+                        <button className="counter-action increment" onClick={e => { model.modificarScore(e, elemento.score, index, -1) }}>+</button>
+                    </div>
+                </div>
             </div>);
       });
-      let playerForm = (<form className="add-player-form" onSubmit={e => {
+      let playerForm = (<form onSubmit={e => {
             e.preventDefault();
             model.agregarJugador(model.input);
-      }}><div className="row">
-                  <div className="col col-xl-8 col-sm-8">
-                        <input type="text" onChange={e => (model.input = e.target)} className="form-control" placeholder="enter a name" /></div>
-                  <div className="col col-xl-4 col-sm-4"><button type="submit">Add Player</button></div>
-            </div></form>);
+      }}>
+                  <input type="text" onChange={e => (model.input = e.target)} className="form-control" placeholder="enter a name" />
+                  <button type="submit">Add Player</button>
+            </form>);
       return (<div className="scoreboard">
             {header}
-            {playerList}
-            {playerForm}
+            <div className="players">{playerList} </div>
+            <div className="add-player-form">{playerForm}</div>
       </div>
       );
 }

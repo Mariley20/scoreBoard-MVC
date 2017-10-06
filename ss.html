@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <div data-reactroot="" class="scoreboard">
+        <div class="header">
+            <table class="stats">
+                    <tr>
+                        <td>Players:</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Total Points:</td>
+                        <td>101</td>
+                    </tr>
+            </table>
+            <h1>Scoreboard</h1>
+            <div class="stopwatch">
+                <h2>Stopwatch</h2>
+                <div class="stopwatch-time">0
+                </div>
+                <button>Start</button>
+                <button>Reset</button>
+            </div>
+        </div>
+        <div class="players">
+            <div class="player">
+                <div class="player-name">
+                    <a class="remove-player">✖</a>Ali samir</div>
+                <div class="player-score">
+                    <div class="counter">
+                        <button class="counter-action decrement">-</button>
+                        <div class="counter-score">60</div>
+                        <button class="counter-action increment">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add-player-form">
+            <form>
+                <input type="text" placeholder="Player Name">
+                <input type="submit" value="Add Player">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
