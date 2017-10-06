@@ -10,14 +10,14 @@ class Timer extends React.Component {
       render() {
             return (
                   <div className="stopwatch">
-                <h2>Stopwatch</h2>
-                <div className="stopwatch-time">{this.state.numero}</div>
-                {this.state.button ?
-                        <button onClick={e => this.pararTiempo(e)}>Stop</button>
-                        :
-                        <button onClick={e => this.iniciarTiempo(e)}>Start</button>
-                  }
-                  <button onClick={e => this.resetearTiempo(e)}>reset</button>
+                        <h2>Stopwatch</h2>
+                        <div className="stopwatch-time">{this.state.numero}</div>
+                        {this.state.button ?
+                              <button onClick={e => this.pararTiempo(e)}>Stop</button>
+                              :
+                              <button onClick={e => this.iniciarTiempo(e)}>Start</button>
+                        }
+                        <button onClick={e => this.resetearTiempo(e)}>reset</button>
             </div>
             );
       }
@@ -93,11 +93,12 @@ const Application = ({ title, model }) => {
       console.log(model.players)
       let header = (
             <div className="header">
-            <div className="stats">
+            <div className="stats row">
                     <div className="col">
                         <label>Players:</label>
                         <label>{model.totalJugadores()}</label>
                     </div>
+                    <div className="w-100"></div>
                     <div className="col">
                         <label>Total Points:</label>
                         <label>{model.totalPuntos()}</label>

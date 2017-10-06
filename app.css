@@ -52,7 +52,7 @@ body {
     }
   
     .player-score {
-      width: 190px;
+      width: 30%;
       background: blue;
     }
   
@@ -120,7 +120,7 @@ body {
   
   .header .stats,
   .header .stopwatch {
-    width: 170px;
+    width: 31%;
   }
   
   .add-player-form form {
